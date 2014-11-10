@@ -258,7 +258,7 @@
 								
 									<p class="our_price_display" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 										{if $product->quantity > 0}<link itemprop="availability" href="http://schema.org/InStock"/>{/if}
-										{if $product->price>0 }
+										{if $product->price <= 0 }
 
 												<span id="our_price_display" itemprop="price" style="font-size:0.7em">{l s='Price on request'}</span>
 								
@@ -274,6 +274,7 @@
 									{/if}
 
 									</p>
+									{if $product->price > 0 }
 									<p id="reduction_percent" {if !$product->specificPrice || $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}>
 										<span id="reduction_percent_display">
 											{if $product->specificPrice && $product->specificPrice.reduction_type == 'percentage'}-{$product->specificPrice.reduction*100}%{/if}
@@ -293,6 +294,7 @@
 											<!-- {if $tax_enabled && $display_tax_label == 1}{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}{/if} -->
 										{/if}
 									</p>
+									{/if}
 									{if $priceDisplay == 2}
 										<br />
 										<span id="pretaxe_price">
